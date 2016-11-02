@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>font-dflourusso glyphs preview</title>
+    <style type="text/css">
+      .letters {
+        display: none;
+      }
+      #readme {
+        padding: 20px;
+      }
+    </style>
+    <script src="jquery-3.1.0.min.js"></script>
+  </head>
+  <body>
+    <div id="readme">
+    </div>
+    <div id="fonts">
+    </div>
+    <script type="text/javascript">
+      $( "#readme" ).load( "readme_as_html.html" );
+      $( "#fonts" ).load( "https://raw.githubusercontent.com/dflourusso/font-dflourusso/master/dist/font-dflourusso-preview.html" );
+    </script>
+  </body>
+</html>
