@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Jogo da Forca</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/main.css">
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <div class="header clearfix">
+          <nav>
+              <ul class="nav nav-pills pull-right">
+                  <li role="presentation" class="active">
+                      <a href="#" v-on:click="newGame">Novo Jogo</a>
+                  </li>
+              </ul>
+          </nav>
+          <h3 class="text-muted">Jogo da Forca</h3>
+      </div>
+      <div class="alert alert-success" role="alert" v-show="winner">
+        <strong>Parabéns!</strong> Você finalizou o jogo!
+      </div>
+      <div class="alert alert-warning" role="alert" v-show="looser">
+        <strong>Oh Oh!</strong> Infelizmente não foi dessa vez!
+      </div>
+      <div class="jumbotron" v-show="show">
+          <h1>Bem Vindo!</h1>
+          <p class="lead">Divertido jogo da forca! Procure começar pelas vogais e teste sua habilidade com as palavras.</p>
+          <p>
+              <a class="btn btn-lg btn-success" href="#" role="button" v-on:click="newGame">Comece a Jogar</a>
+          </p>
+      </div>
+      <div v-show="!show && wrongLetters.length != 6">
+        <h3>Atenção! <span class="label label-info">Você pode errar {{ 6 - wrongLetters.length }}</span></h3>
+      </div>
+      <div class="text-center well well-lg" v-show="!show">
+        <span class="letter" v-for="letter in gameWord">{{ letter }}</span>
+      </div>
+      <div class="text-center" v-show="!show">
+        <div class="row">
+          <div class="col-md-12">
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('Q', $event)">Q</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('W', $event)">W</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('E', $event)">E</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('R', $event)">R</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('T', $event)">T</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('Y', $event)">Y</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('U', $event)">U</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('I', $event)">I</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('O', $event)">O</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('P', $event)">P</a>
+          </div>          
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('A', $event)">A</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('S', $event)">S</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('D', $event)">D</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('F', $event)">F</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('G', $event)">G</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('H', $event)">H</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('J', $event)">J</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('K', $event)">K</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('L', $event)">L</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('Ç', $event)">Ç</a>
+          </div>          
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('Z', $event)">Z</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('X', $event)">X</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('C', $event)">C</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('V', $event)">V</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('B', $event)">B</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('N', $event)">N</a>
+            <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('M', $event)">M</a>
+          </div>          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        show: true,
+        winner: false,
+        looser: false,
+        words: [
+          'BONECA',
+          'AVIAO',
+          'FELICIDADE',
+          'AMARELO'
+        ],
+        word: [],
+        gameWord: [],
+        guessedLetters: [],
+        wrongLetters: []
+      },
+      methods: {
+        selectWord: function() {
+          this.word = this.words[Math.floor( Math.random() * this.words.length )].split('');
+        },
+        newGame: function() {
+          this.show = false;
+          this.winner = false;
+          this.looser = false;
+          this.guessedLetters = [];
+          this.wrongLetters = [];
+          this.selectWord();
+          this.initWord();
+          document.querySelectorAll("a.btn-default").forEach(function (el, index) {
+            el.classList.remove("disabled");
+          });
+        },
+        initWord: function () {
+          this.gameWord = '_'.repeat(this.word.length).split('');
+        },
+        makeGuess: function (letter) {
+          var self = this;
+          var changed = false;
+          this.word.forEach(function (item, index) {
+            if (item === letter) {
+              self.gameWord.splice(index, 1, letter);
+              changed = true;
+            }
+          });
+
+          return changed;
+        },
+        addLetter: function(letter, event) {
+          event.target.classList.add("disabled");
+          if (!this.makeGuess(letter)) {
+            if (this.wrongLetters.indexOf(letter) < 0) {
+              this.wrongLetters.push(letter);
+            }
+          }
+          this.shouldFinishGame();
+        },
+        hasGuessers: function() {
+          return this.wrongLetters.length <= 5;
+        },
+        shouldFinishGame: function() {
+          if (this.gameWord.indexOf('_') < 0) {
+            this.winner = true;
+          } else if(!this.hasGuessers()) {
+            this.looser = true;
+          } 
+        }
+      }
+    })
+  </script>
+</body>
+</html>
