@@ -54,7 +54,7 @@
             <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('I', $event)">I</a>
             <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('O', $event)">O</a>
             <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('P', $event)">P</a>
-          </div>          
+          </div>
         </div>
         <div class="row">
           <div class="col-md-12">
@@ -68,7 +68,7 @@
             <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('K', $event)">K</a>
             <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('L', $event)">L</a>
             <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('Ç', $event)">Ç</a>
-          </div>          
+          </div>
         </div>
         <div class="row">
           <div class="col-md-12">
@@ -79,12 +79,12 @@
             <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('B', $event)">B</a>
             <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('N', $event)">N</a>
             <a class="btn btn-default" href="#" role="button" v-on:click="addLetter('M', $event)">M</a>
-          </div>          
+          </div>
         </div>
       </div>
     </div>
   </div>
-  
+
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <!-- Latest compiled and minified JavaScript -->
@@ -102,7 +102,61 @@
           'BONECA',
           'AVIAO',
           'FELICIDADE',
-          'AMARELO'
+          'AMARELO',
+          'ACERVO',
+          'ALBUM',
+          'ALCATEIA',
+          'ANTOLOGIA',
+          'ARMADA',
+          'ARQUIPELAGO',
+          'ARSENAL',
+          'ASSEMBLEIA',
+          'ATLAS',
+          'BAGAGEM',
+          'BANDEIRA',
+          'BANCA',
+          'BANDA',
+          'BATALHAO',
+          'BATERIA',
+          'BIBLIOTECA',
+          'BOIADA',
+          'CACHO',
+          'CARAVANA',
+          'CARDUME',
+          'CLIENTELA',
+          'CODIGO',
+          'COLMEIA',
+          'CONGREGACAO',
+          'CONGRESSO',
+          'CONSELHO',
+          'CONSTELACAO',
+          'CORPO',
+          'ELENCO',
+          'ENXOVAL',
+          'ESQUADRILHA',
+          'FAUNA',
+          'FLORA',
+          'GALERIA',
+          'MATILHA',
+          'MANADA',
+          'MOLHO',
+          'MULTIDAO',
+          'NINHADA',
+          'NUVEM',
+          'PELOTAO',
+          'PENTE',
+          'PLATEIA',
+          'QUADRILHA',
+          'RANCHO',
+          'REBANHO',
+          'REPERTORIO',
+          'REVOADA',
+          'RODA',
+          'TRIPULACAO',
+          'TROPA',
+          'TROUXA',
+          'TURMA',
+          'VOCABULARIO'
         ],
         word: [],
         gameWord: [],
@@ -157,7 +211,7 @@
             this.winner = true;
           } else if(!this.hasGuessers()) {
             this.looser = true;
-          } 
+          }
         }
       }
     })
